@@ -35,7 +35,7 @@ public class User {
 	@NotBlank(message = "Please enter your last name")
     private String lastName;
 	
-	@Column(columnDefinition = "VARCHAR(100)")
+	@Column(columnDefinition = "VARCHAR(100)" , unique=true)
 	@Email(message = "Please enter a valid email format")
 	@NotBlank(message = "Please enter your email")
     private String email;
@@ -66,12 +66,23 @@ public class User {
 	@OneToMany(mappedBy="admin", fetch = FetchType.LAZY)
 	private List<Event> createdEvents;
 	
+	@OneToMany(mappedBy="user", fetch = FetchType.LAZY)
+	private List<Comment> comments;
+	
 	public List<Event> getAttendingEvents() {
 		return attendingEvents;
 	}
 
 	public void setAttendingEvents(List<Event> attendingEvents) {
 		this.attendingEvents = attendingEvents;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
 	public List<Event> getCreatedEvents() {

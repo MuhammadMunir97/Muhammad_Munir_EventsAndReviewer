@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -56,13 +57,24 @@ public class Event {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="admin_id")
 	private User admin;
-	 
+
+	@OneToMany(mappedBy="event", fetch = FetchType.LAZY)
+	private List<Comment> comments;
+	
 	public User getAdmin() {
 		return admin;
 	}
 
 	public void setAdmin(User admin) {
 		this.admin = admin;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
 	public Long getId() {
